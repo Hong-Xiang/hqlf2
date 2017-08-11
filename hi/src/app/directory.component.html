@@ -1,22 +1,21 @@
-<button class='btn btn-primary' (click)="getDirectory(path)">Open Directory</button>
-<input [(ngModel)]="path" placeholder="Enter Path Here">
+<div>
+    <button class='btn btn-primary' (click)="getDirectory(path)">Open Directory</button>
+    <input [(ngModel)]="path" placeholder="Enter Path Here">
 
-<div *ngIf="isShow">
-    <div>
-        <ol class="breadcrumb">
-            <li *ngFor="let part of directory.parts">
-                {{part}}
-            </li>
-        </ol>
-        <button type="btn btn-primary" (click)="exit()">Up</button>
-        <button type="btn btn-primary" (click)="close()">Close</button>
-    </div>
-    <div class="list-group">
-        <a *ngFor="let file of directory.files" class="list-group-item" (click)="enter(file.name)">
-            <app-file [file]=file></app-file>
-        </a>
-    </div>
-    <div>
-        <h3> Parent: {{directory.parent}} </h3>
+    <div *ngIf="isShow">
+        <div>
+            <ol class="breadcrumb fixed-width">
+                <li *ngFor="let part of directory.parts">
+                    {{part}}
+                </li>
+            </ol>
+            <button type="btn btn-primary" (click)="exit()">Up</button>
+            <button type="btn btn-primary" (click)="close()">Close</button>
+        </div>
+        <div class="list-group directory">
+            <a *ngFor="let file of directory.files" class="list-group-item" (click)="enter(file.name)">
+                <app-file [file]=file></app-file>
+            </a>
+        </div>
     </div>
 </div>

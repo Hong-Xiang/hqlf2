@@ -7,4 +7,8 @@ import { File } from './file';
 })
 export class FileComponent {
   @Input() file: File;
+
+  onFileClick(): void {
+    console.log('File Clicked.');
+  }
 }

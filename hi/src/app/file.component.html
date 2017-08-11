@@ -1,6 +1,6 @@
-<div>
+<div (click)="onFileClick()">
     <span *ngIf=file.isdir class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
     <span>        
           {{file.name}}
-      </span>
+    </span>
 </div>

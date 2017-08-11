@@ -6,10 +6,17 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { DirectoryComponent } from './directory.component';
 import { FileComponent } from './file.component';
+import { TextEditorComponent } from './texteditor.component';
+
 import { DirectoryService } from './directory.service';
 
 @NgModule({
-  declarations: [AppComponent, DirectoryComponent, FileComponent],
+  declarations: [
+    AppComponent,
+    DirectoryComponent,
+    FileComponent,
+    TextEditorComponent
+  ],
   imports: [BrowserModule, FormsModule, HttpModule],
   providers: [DirectoryService],
   bootstrap: [AppComponent]
