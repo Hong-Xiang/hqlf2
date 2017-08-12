@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { File } from './file';
+import { FileService } from './file.service';
 
 @Component({
   selector: 'app-file',
@@ -7,8 +8,9 @@ import { File } from './file';
 })
 export class FileComponent {
   @Input() file: File;
+  constructor(private fileService: FileService) {}
 
-  onFileClick(): void {
-    console.log('File Clicked.');
+  onClick() {
+    this.fileService.openFile(this.file);
   }
 }

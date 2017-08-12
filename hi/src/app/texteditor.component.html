@@ -1,14 +1,10 @@
 <div class='app-editor'>
+  <div *ngIf="file">
     <div>
-
-
+      <label> FileName: {{file.name}} </label>
+      <button type="btn" (click)="onSaveClick()">Save</button>
     </div>
-    <div class="input-group">
-        <button class='input-btn btn-primary'>Open File</button>
-        <input [(ngModel)]="path" placeholder="Enter Path Here">
-        
-        <!-- <span class="input-group-addon" id="basic-addon1">@</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"> -->
-    </div>
+    <textarea [(ngModel)]="file.contents"></textarea>
+  </div>
 
 </div>

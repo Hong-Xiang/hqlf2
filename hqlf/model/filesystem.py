@@ -73,6 +73,11 @@ class FileUnix:
 
     @property
     @_with_check
+    def name(self):
+        return self._path.name
+
+    @property
+    @_with_check
     def is_exis(self):
         return self._is_exis
 

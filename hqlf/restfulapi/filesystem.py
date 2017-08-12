@@ -6,6 +6,8 @@ from hqlf.model.filesystem import Directory as DirectoryModel
 from hqlf.model.filesystem import File as FileModel
 from hqlf.model.filesystem import NonePathError, ExecDirError
 
+import json
+
 
 def _error_handle(err):
     def emsg(text):
@@ -114,6 +116,7 @@ class File(Resource):
             contents = f.contents()
             results = {
                 'status': 'OK',
+                'name': f.name,
                 'path': f.path,
                 'isexe': f.is_exec,
                 'parent': f.parent,
@@ -134,6 +137,7 @@ class File(Resource):
             contents = f.contents()
             results = {
                 'status': 'OK',
+                'name': f.name,
                 'path': f.path,
                 'isexe': f.is_exec,
                 'parent': f.parent,
@@ -151,10 +155,16 @@ class File(Resource):
             f = FileModel(path, is_dir=False, is_exis=True)
             args = _parser.parse_args()
             contents = request.form.get('data')
+            if contents is None:
+                contents = json.loads(request.data).get('data')
+            print(request.form)
+            print('data', request.data)
+            print('contents', contents)
             f.modify(data=contents)
             contents = f.contents()
             results = {
                 'status': 'OK',
+                'name': f.name,
                 'path': f.path,
                 'isexe': f.is_exec,
                 'parent': f.parent,

@@ -1,9 +1,6 @@
 import { File } from './file';
 
 export class Directory {
-  path: string;
-  parts: string[];
+  root: File;
   files: File[];
-  parent: string;
 }
-
