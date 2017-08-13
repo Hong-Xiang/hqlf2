@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
+// import { ClarityModule } from 'clarity-angular';
 import { AppComponent } from './app.component';
 import { DirectoryComponent } from './directory.component';
 import { FileComponent } from './file.component';
@@ -22,13 +23,20 @@ import { TextEditorService } from './texteditor.service';
     FileComponent,
     TextEditorComponent
   ],
-  imports: [BrowserModule, FormsModule, HttpModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    HttpClientModule
+    // ClarityModule.forRoot()
+  ],
   providers: [
     FileSystemService,
     FileService,
     DirectoryService,
     TextEditorService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
