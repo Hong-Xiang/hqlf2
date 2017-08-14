@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/font-awesome/css/font-awesome.css";
+/* @import "../node_modules/primeng/resources/themes/bootstrap/theme.css"; */
+@import "./app/app-theme.css";
+@import "../node_modules/primeng/resources/primeng.min.css";
+html,
+body {
+  height: 100%;
+}
+.app-fill-auto {
+  margin: 0;
+  padding: 0;
+  background-color: #00aabb;
+}
+
+.app-10-vh {
+  /* height: 10vh; */
+}
+
+.app-bg1 {
+  background-color: #25333d;
+}
+.app-bg2 {
+  background-color: #a6d8e7;
+}
+.app-bg3 {
+  background-color: #798893;
+}
+.app-bg4 {
+  background-color: #49afd9;
+}
+.app-bg5 {
+  background-color: #c1cdd4;
+}
+.app-bg6 {
+  background-color: #0065ab;
+}

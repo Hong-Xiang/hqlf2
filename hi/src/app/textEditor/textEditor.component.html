@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-start hi-h1p5 m-0">
+  <button class="btn btn-primary mx-1">
+      <i class="fa fa-plus"> New </i>
+    </button>
+  <button class="btn btn-primary mx-1">
+      <i class="fa fa-folder-open"></i> Open
+    </button>
+  <button class="btn btn-primary btn-warning mx-1" (click)="saveFile()"><i class="fa fa-check"></i> Save </button>
+  <button class="btn btn-primary mx-1" (click)="reload()"><i class="fa fa-refresh"></i> Reload </button>
+  <button class="btn btn-primary btn-success mx-1" (click)="runShell()"><i class="fa fa-play"></i> Run </button>
+  <button class="btn btn-primary btn-danger ml-auto mx-1"><i class="fa fa-trash"></i></button>
+</div>
+
+
+<div class="border-top-1">
+  <p-tabView [activeIndex]="selectedId" (onChange)="tabChange($event)" (onClose)="tabClose($event)">
+    <p-tabPanel *ngFor="let file of files; let i=index" header="{{file.name}}" [closable]="true" [selected]="checkSelected(i)">
+      <textarea [(ngModel)]="file.contents" class="hi-text"></textarea>
+    </p-tabPanel>
+  </p-tabView>
+</div>

@@ -1,0 +1,51 @@
+{
+  "files": [
+    {
+      "name": "home",
+      "path": "/tmp/home",
+      "parent": "/tmp",
+      "isdir": true,
+      "isexe": false,
+      "childrenName": ["f0", "f1", "f2"],
+      "childrenPath": ["/tmp/home/f0", "/tmp/home/f1", "/tmp/home/f2"],
+      "childrenIsDir": [false, false, true]
+    },
+    {
+      "name": "f0",
+      "path": "/tmp/home/f0",
+      "isdir": false,
+      "isexe": false,
+      "contents": ["Contents of f0"]
+    },
+    {
+      "name": "f1",
+      "path": "/tmp/home/f1",
+      "isdir": false,
+      "isexe": true,
+      "contents": ["Contents of f1"]
+    },
+    {
+      "name": "f2",
+      "path": "/tmp/home/f2",
+      "isdir": true,
+      "isexe": false,
+      "childrenName": ["f4", "f5"],
+      "childrenPath": ["/tmp/home/f2/f4", "/tmp/home/f2/f5"],
+      "childrenIsDir": [false, false]
+    },
+    {
+      "name": "f4",
+      "path": "/tmp/home/f2/f4",
+      "isdir": false,
+      "isexe": false,
+      "contents": ["Contents of f4"]
+    },
+    {
+      "name": "f5",
+      "path": "/tmp/home/f2/f5",
+      "isdir": false,
+      "isexe": false,
+      "contents": ["Contents of f5"]
+    }
+  ]
+}
