@@ -4,17 +4,18 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { File } from './file';
-import { Directory } from './directory';
 
 @Injectable()
 export class FileSystemService {
   apiUrl = 'http://192.168.1.118:5000/api/';
   files: File[] = [];
-
+  isDebug = false;
   constructor(private http: Http) {
-    this.http
-      .get('/assets/testdata.json')
-      .subscribe(data => (this.files = data.json()['files']));
+    if (this.isDebug) {
+      this.http
+        .get('/assets/testdata.json')
+        .subscribe(data => (this.files = data.json()['files']));
+    }
   }
 
   parseFile(result: any): File {
@@ -26,7 +27,7 @@ export class FileSystemService {
       isdir: false,
       isexe: res.isexe,
       url: undefined,
-      contents: res.constents,
+      contents: res.contents,
       childrenIsDir: [],
       childrenPath: [],
       childrenName: []
@@ -55,14 +56,6 @@ export class FileSystemService {
     return file;
   }
 
-  // getFile(filePath: string): File {
-  //   for (const f of this.files) {
-  //     if (f.path === filePath) {
-  //       return f;
-  //     }
-  //   }
-  // }
-
   addFile(file: File) {
     for (let i = 0; i < this.files.length; ++i) {
       if (this.files[i].path === file.path) {
@@ -73,15 +66,14 @@ export class FileSystemService {
     this.files.push(file);
   }
 
-  // getFile(filePath: string): Promise<File> {
-  //   for (const f of this.files) {
-  //     if (f.path === filePath) {
-  //       return Promise.resolve(f);
-  //     }
-  //   }
-  //   console.log('FILE NOT FOUND' + filePath);
-  //   console.log(this.files);
-  // }
+  getTestFile(filePath: string): Promise<File> {
+    for (const f of this.files) {
+      if (f.path === filePath) {
+        return Promise.resolve(f);
+      }
+    }
+    console.log(filePath + 'not found.');
+  }
 
   // getDirectory(filePath: string): Promise<File>{
   //   return this.getFile(filePath);
@@ -96,7 +88,7 @@ export class FileSystemService {
     }
   }
 
-  saveFile(file: File) {
+  saveTestFile(file: File) {
     for (let i = 0; i < this.files.length; ++i) {
       if (this.files[i].path === file.path) {
         this.files[i] = file;
@@ -106,19 +98,19 @@ export class FileSystemService {
     this.files.push(file);
   }
 
-  // saveFile(file: File): Promise<string> {
-  //   const encodedPath = encodeURIComponent(file.path);
-  //   const doubleEncodedPath = encodeURIComponent(encodedPath);
-  //   const getUrl = this.apiUrl + 'file/' + doubleEncodedPath;
-  //   console.log(file.contents);
-  //   const data = { data: file.contents + '\n' };
-  //   console.log(data);
-  //   return this.http.put(getUrl, data).toPromise().then(res => {
-  //     console.log('Save succeed');
-  //     console.log(res);
-  //     return res.json();
-  //   });
-  // }
+  saveFile(file: File): Promise<any> {
+    const encodedPath = encodeURIComponent(file.path);
+    const doubleEncodedPath = encodeURIComponent(encodedPath);
+    const getUrl = this.apiUrl + 'file/' + doubleEncodedPath;
+    console.log(file.contents);
+    const data = { data: file.contents + '\n' };
+    console.log(data);
+    return this.http.put(getUrl, data).toPromise().then(res => {
+      console.log('Save succeed');
+      console.log(res);
+      return res.json();
+    });
+  }
 
   getFile(path: string): Promise<File> {
     const encodedPath = encodeURIComponent(path);
@@ -127,7 +119,12 @@ export class FileSystemService {
     return this.http
       .get(getUrl)
       .toPromise()
-      .then(res => this.parseFile(res.text()))
+      .then(res => {
+        console.log(res);
+        const file = this.parseFile(res.text());
+        console.log(file);
+        return file;
+      })
       .catch(err => this.handleError(err));
   }
 

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { File } from './file';
+import { File } from '../file/file';
+import { FileService } from '../file/file.service';
 import { TreeNode } from 'primeng/primeng';
-import { FileService } from './file.service';
 
 @Component({
   selector: 'app-explorer-directory',

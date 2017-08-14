@@ -68,6 +68,10 @@ export class FileService {
     }
   }
 
+  getTestFile(path: string): Promise<File> {
+    return this.fileSystemService.getTestFile(path);
+  }
+
   // loadOrFindFile(path: string): number {
   //   const i = this.findFile(path);
   //   if (i < 0) {

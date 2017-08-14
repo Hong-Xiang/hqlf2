@@ -66,7 +66,9 @@ class Task(Resource):
         """
         try:
             path = _unquote(path)
-            command = request.form['command']
+            command = request.form.get('command')
+            if command is None:
+                command = json.loads(request.data).get('command')
             cmd = 'cd ' + path + ' && ' + command
             os.system(cmd)
             results = {

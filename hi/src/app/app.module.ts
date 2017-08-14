@@ -18,21 +18,15 @@ import {
 } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
-import { TextEditorComponent } from './texteditor.component';
-// import { FileComponent } from './explorer/file.component';
-import { FileSystemService } from './explorer/fileSystem.service';
-import { FileService } from './explorer/file.service';
+import { FileSystemService } from './file/fileSystem.service';
+import { FileService } from './file/file.service';
 import { DirectoryComponent } from './explorer/directory.component';
-// import { DirectoryService } from './directory.service';
-// import { TextEditorService } from './texteditor.service';
+import { TextEditorComponent } from './textEditor/textEditor.component';
+import { TextEditorService } from './textEditor/textEditor.service';
+import { TaskService } from './task/task.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DirectoryComponent,
-    // FileComponent,
-    TextEditorComponent
-  ],
+  declarations: [AppComponent, DirectoryComponent, TextEditorComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -50,6 +44,8 @@ import { DirectoryComponent } from './explorer/directory.component';
   providers: [
     FileSystemService,
     FileService,
+    TextEditorService,
+    TaskService
     // TextEditorService
   ],
   bootstrap: [AppComponent],

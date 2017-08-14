@@ -21,9 +21,6 @@
 <button (click)="setArrayTest()">arrayTest</button> -->
 
 
- <app-explorer-file [path]="'/tmp/home'"></app-explorer-file>
-<app-explorer-directory></app-explorer-directory>
-<button (click)="testFileSystem()">FS TEST</button>
 
 
 
@@ -61,7 +58,7 @@
 
 
 
-<!-- <div class="app-main-window app-bg6">
+<div class="app-main-window app-bg6">
 
   <nav class="navbar navbar-expand-md navbar-default fixed-top border-0 rounded-0 app-nav">
 
@@ -95,11 +92,10 @@
   <div class="container-fluid" style="height: 95vh;">
     <div class="row h-100">
       <div class="col-md-2 app-bg3 sticky-top h-100 px-0">
-        <app-directory></app-directory>
+        <app-explorer-directory (onOpenFile)="explorerOpenFileEvent($event)"></app-explorer-directory>
       </div>
       <div class="col-md-10 ml-md-auto p-0">
-        <app-editor></app-editor>
-
+        <app-texteditor></app-texteditor>
       </div>
 
 
@@ -107,7 +103,7 @@
   </div>
 
 
-</div> -->
+</div>
 
 
 

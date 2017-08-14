@@ -1,10 +1,17 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  AfterViewInit,
+  ViewChild
+} from '@angular/core';
 import { Http } from '@angular/http';
 
-import { FileSystemService } from './explorer/fileSystem.service';
-import { FileService } from './explorer/file.service';
-import { File } from './explorer/file';
+import { FileSystemService } from './file/fileSystem.service';
+import { FileService } from './file/file.service';
+import { File } from './file/file';
 
+import { TextEditorComponent } from './textEditor/textEditor.component';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +19,7 @@ import { File } from './explorer/file';
   styleUrls: ['./app.component.css'],
   providers: []
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'app';
   data = [1, 2, 3, 4, 5, 6];
   idSelected = 0;
@@ -21,13 +28,14 @@ export class AppComponent {
   arrayTest: [number, string];
   filedata: File[];
 
-  constructor(
-    private http: Http,
-    private fileService: FileService,
-  ) {
+  @ViewChild(TextEditorComponent)
+  private textEditorComponent: TextEditorComponent;
+
+  constructor(private http: Http, private fileService: FileService) {
     this.filedata = this.fileService.filesLoaded;
   }
 
+  ngAfterViewInit() {}
   addId() {
     this.idSelected++;
     this.idSelected = this.idSelected % 6;
@@ -67,11 +75,16 @@ export class AppComponent {
     console.log(this.arrayTest);
   }
 
-  testFileSystem() {
+  testFileSystem() {}
 
+  explorerOpenFileEvent(event) {
+    this.editFile(event);
   }
 
-
+  editFile(path: string) {
+    console.log(path);
+    this.textEditorComponent.openFile(path);
+  }
   // checkSvr(): void {
   //   this.directoryService.checkServer().then(res => this.data = res).catch();
   // }
