@@ -57,7 +57,13 @@ class Task(Resource):
             return _error_handle(err)
 
     def post(self, path):
-
+        """
+        Use with HTTP request with POST method.
+        path:
+            double quoted path.
+        body:
+            {"command": <string:command to run.>}
+        """
         try:
             path = _unquote(path)
             command = request.form['command']

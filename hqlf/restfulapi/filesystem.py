@@ -54,6 +54,7 @@ class Directory(Resource):
                      for fn in contents['files']]
             results = {
                 'status': 'OK',
+                'name': pwd.name,
                 'path': pwd.path,
                 'files': contents['files'],
                 'isdir': contents['isdir'],

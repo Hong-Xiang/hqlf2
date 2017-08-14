@@ -1,9 +1,12 @@
 export class File {
   name: string;
-  path: string; // url
-  parent: string; // url
+  path: string;
+  parent: string;
   isdir: boolean;
   isexe: boolean;
   url: string;
-  contents: string[] | undefined;
+  childrenPath: string[] | null;
+  childrenIsDir: boolean[] | null;
+  childrenName: string[] | null;
+  contents: string | null;
 }

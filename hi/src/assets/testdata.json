@@ -3,15 +3,12 @@
     {
       "name": "home",
       "path": "/tmp/home",
+      "parent": "/tmp",
       "isdir": true,
       "isexe": false,
-      "contents": [
-        "/tmp/home/f0",
-        "/tmp/home/f1",
-        "/tmp/home/f2",
-        "/tmp/home/f3",
-        "/tmp/home/f4"
-      ]
+      "childrenName": ["f0", "f1", "f2"],
+      "childrenPath": ["/tmp/home/f0", "/tmp/home/f1", "/tmp/home/f2"],
+      "childrenIsDir": [false, false, true]
     },
     {
       "name": "f0",
@@ -32,7 +29,9 @@
       "path": "/tmp/home/f2",
       "isdir": true,
       "isexe": false,
-      "contents": ["/tmp/home/f2/f4", "/tmp/home/f2/f5"]
+      "childrenName": ["f4", "f5"],
+      "childrenPath": ["/tmp/home/f2/f4", "/tmp/home/f2/f5"],
+      "childrenIsDir": [false, false]
     },
     {
       "name": "f4",

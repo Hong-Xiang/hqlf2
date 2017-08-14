@@ -18,21 +18,19 @@ import {
 } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
-import { DirectoryComponent } from './directory.component';
-import { FileComponent } from './file.component';
 import { TextEditorComponent } from './texteditor.component';
-
-import { FileSystemService } from './fileSystem.service';
-
-import { FileService } from './file.service';
-import { DirectoryService } from './directory.service';
-import { TextEditorService } from './texteditor.service';
+// import { FileComponent } from './explorer/file.component';
+import { FileSystemService } from './explorer/fileSystem.service';
+import { FileService } from './explorer/file.service';
+import { DirectoryComponent } from './explorer/directory.component';
+// import { DirectoryService } from './directory.service';
+// import { TextEditorService } from './texteditor.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DirectoryComponent,
-    FileComponent,
+    // FileComponent,
     TextEditorComponent
   ],
   imports: [
@@ -52,8 +50,7 @@ import { TextEditorService } from './texteditor.service';
   providers: [
     FileSystemService,
     FileService,
-    DirectoryService,
-    TextEditorService
+    // TextEditorService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

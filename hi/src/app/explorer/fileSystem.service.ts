@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 // import { getDirectory } from './directory-mock';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -7,11 +7,15 @@ import { File } from './file';
 import { Directory } from './directory';
 
 @Injectable()
-export class FileSystemService implements OnInit {
+export class FileSystemService {
   apiUrl = 'http://192.168.1.118:5000/api/';
-  files: File[];
+  files: File[] = [];
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+    this.http
+      .get('/assets/testdata.json')
+      .subscribe(data => (this.files = data.json()['files']));
+  }
 
   parseFile(result: any): File {
     const res = JSON.parse(result);
@@ -21,19 +25,67 @@ export class FileSystemService implements OnInit {
       parent: res.parent,
       isdir: false,
       isexe: res.isexe,
-      url: 'UKN',
-      contents: res.contents
+      url: undefined,
+      contents: res.constents,
+      childrenIsDir: [],
+      childrenPath: [],
+      childrenName: []
     };
     return file;
   }
 
-  getFile(filePath: string): Promise<File> {
-    for (const f of this.files) {
-      if (f.path === filePath) {
-        return Promise.resolve(f);
+  parseDirectory(result: any): File {
+    const res = JSON.parse(result);
+    const file: File = {
+      name: res.name,
+      path: res.path,
+      parent: res.parent,
+      isdir: true,
+      isexe: res.isexe,
+      url: undefined,
+      contents: null,
+      childrenIsDir: res.isdir,
+      childrenPath: res.paths,
+      childrenName: res.files
+    };
+    if (!file.name) {
+      file.name = res.parts.slice(-1, 1);
+      console.log(file.name);
+    }
+    return file;
+  }
+
+  // getFile(filePath: string): File {
+  //   for (const f of this.files) {
+  //     if (f.path === filePath) {
+  //       return f;
+  //     }
+  //   }
+  // }
+
+  addFile(file: File) {
+    for (let i = 0; i < this.files.length; ++i) {
+      if (this.files[i].path === file.path) {
+        this.files[i] = file;
+        return;
       }
     }
+    this.files.push(file);
   }
+
+  // getFile(filePath: string): Promise<File> {
+  //   for (const f of this.files) {
+  //     if (f.path === filePath) {
+  //       return Promise.resolve(f);
+  //     }
+  //   }
+  //   console.log('FILE NOT FOUND' + filePath);
+  //   console.log(this.files);
+  // }
+
+  // getDirectory(filePath: string): Promise<File>{
+  //   return this.getFile(filePath);
+  // }
 
   closeFile(file: File) {
     for (let i = 0; i < this.files.length; ++i) {
@@ -54,12 +106,6 @@ export class FileSystemService implements OnInit {
     this.files.push(file);
   }
 
-  ngOnInit() {
-    this.http
-      .get('/assets/testdata.json')
-      .subscribe(data => (this.files = data.json()['files']));
-  }
-
   // saveFile(file: File): Promise<string> {
   //   const encodedPath = encodeURIComponent(file.path);
   //   const doubleEncodedPath = encodeURIComponent(encodedPath);
@@ -74,28 +120,31 @@ export class FileSystemService implements OnInit {
   //   });
   // }
 
-  // getFile(path: string): Promise<File> {
-  //   const encodedPath = encodeURIComponent(path);
-  //   const doubleEncodedPath = encodeURIComponent(encodedPath);
-  //   const getUrl = this.apiUrl + 'file/' + doubleEncodedPath;
-  //   return this.http
-  //     .get(getUrl)
-  //     .toPromise()
-  //     .then(res => this.parseFile(res.text()))
-  //     .catch(err => this.handleError(err));
-  // }
+  getFile(path: string): Promise<File> {
+    const encodedPath = encodeURIComponent(path);
+    const doubleEncodedPath = encodeURIComponent(encodedPath);
+    const getUrl = this.apiUrl + 'file/' + doubleEncodedPath;
+    return this.http
+      .get(getUrl)
+      .toPromise()
+      .then(res => this.parseFile(res.text()))
+      .catch(err => this.handleError(err));
+  }
 
-  // getDirectory(path: string): Promise<Directory> {
-  //   const encodedPath = encodeURIComponent(path);
-  //   const doubleEncodedPath = encodeURIComponent(encodedPath);
-  //   const getUrl = this.apiUrl + 'dir/' + doubleEncodedPath;
+  getDirectory(path: string): Promise<File> {
+    const encodedPath = encodeURIComponent(path);
+    const doubleEncodedPath = encodeURIComponent(encodedPath);
+    const getUrl = this.apiUrl + 'dir/' + doubleEncodedPath;
 
-  //   return this.http
-  //     .get(getUrl)
-  //     .toPromise()
-  //     .then(res => this.parseDirectory(res.text()))
-  //     .catch(err => this.handleError(err));
-  // }
+    return this.http
+      .get(getUrl)
+      .toPromise()
+      .then(res => {
+        const node = this.parseDirectory(res.text());
+        return node;
+      })
+      .catch(err => this.handleError(err));
+  }
 
   // update_file(response: string): void {
   //   const res = JSON.parse(response);

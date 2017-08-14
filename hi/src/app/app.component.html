@@ -1,4 +1,4 @@
-<h1>{{data[idSelected]}}</h1>
+<!-- <h1>{{data[idSelected]}}</h1>
 <h1>{{data[3]}}</h1>
 <h2>{{data}}</h2>
 <div *ngFor="let od of data">
@@ -18,7 +18,15 @@
 <div *ngFor="let d of arrayTest">
   {{d}}
 </div>
-<button (click)="setArrayTest()">arrayTest</button>
+<button (click)="setArrayTest()">arrayTest</button> -->
+
+
+ <app-explorer-file [path]="'/tmp/home'"></app-explorer-file>
+<app-explorer-directory></app-explorer-directory>
+<button (click)="testFileSystem()">FS TEST</button>
+
+
+
 
 
 

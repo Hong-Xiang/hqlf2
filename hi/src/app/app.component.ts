@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Http } from '@angular/http';
+
+import { FileSystemService } from './explorer/fileSystem.service';
+import { FileService } from './explorer/file.service';
+import { File } from './explorer/file';
+
 
 @Component({
   selector: 'app-root',
@@ -14,7 +19,14 @@ export class AppComponent {
   path: string;
   dataJSON: any[];
   arrayTest: [number, string];
-  constructor(private http: Http) {}
+  filedata: File[];
+
+  constructor(
+    private http: Http,
+    private fileService: FileService,
+  ) {
+    this.filedata = this.fileService.filesLoaded;
+  }
 
   addId() {
     this.idSelected++;
@@ -44,7 +56,6 @@ export class AppComponent {
   }
 
   deleteTest() {
-    this.data.
     this.data.splice(2, 1);
     console.log(this.data);
   }
@@ -55,6 +66,12 @@ export class AppComponent {
     this.arrayTest.push(1.0546);
     console.log(this.arrayTest);
   }
+
+  testFileSystem() {
+
+  }
+
+
   // checkSvr(): void {
   //   this.directoryService.checkServer().then(res => this.data = res).catch();
   // }
