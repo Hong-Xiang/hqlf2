@@ -1,4 +1,7 @@
 import { Component, Input, Output, OnDestroy } from '@angular/core';
+
+import { TreeNode } from 'primeng/primeng';
+
 import { Directory } from './directory';
 import { DirectoryService } from './directory.service';
 import { Subscription } from 'rxjs/Subscription';

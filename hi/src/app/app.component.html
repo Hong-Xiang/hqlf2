@@ -1,4 +1,130 @@
-<clr-main-container class="main-container">
+<h1>{{data[idSelected]}}</h1>
+<h1>{{data[3]}}</h1>
+<h2>{{data}}</h2>
+<div *ngFor="let od of data">
+  {{od}}
+</div>
+<button (click)="addId()">add</button>
+<button (click)="decId()">dec</button>
+<button (click)="change()">change</button>
+<button (click)="deleteTest()">DeleteTest</button>
+
+<div *ngFor="let f of dataJSON">
+  {{f.name}} : {{f.path}}
+</div>
+<button (click)="loadJSON()">loadJSON</button>
+
+
+<div *ngFor="let d of arrayTest">
+  {{d}}
+</div>
+<button (click)="setArrayTest()">arrayTest</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="app-main-window app-bg6">
+
+  <nav class="navbar navbar-expand-md navbar-default fixed-top border-0 rounded-0 app-nav">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <span class="fa fa-home"></span>
+        HQ Lab UI
+      </a>
+    </div>
+
+
+
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Dashboard</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Explorer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Task</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Doc</a>
+      </li>
+    </ul>
+
+  </nav>
+
+
+  <div class="container-fluid" style="height: 95vh;">
+    <div class="row h-100">
+      <div class="col-md-2 app-bg3 sticky-top h-100 px-0">
+        <app-directory></app-directory>
+      </div>
+      <div class="col-md-10 ml-md-auto p-0">
+        <app-editor></app-editor>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <clr-main-container class="main-container">
   <div class="alert alert-app-level hide">
   </div>
   <header class="header header-1">
@@ -9,10 +135,7 @@
       </a>
     </div>
     <div class="header-nav">
-      <a href="#" class="nav-link nav-text">Dashboard</a>
-      <a href="#" class="nav-link nav-text">Explorer</a>
-      <a href="#" class="nav-link nav-text">Tasks</a>
-      <a href="#" class="nav-link nav-text">Doc</a>
+
     </div>
     <div class="header-actions">
       <a href="#" class="nav-link nav-icon">
@@ -24,74 +147,37 @@
     </div>
   </header>
 
-  <!-- <nav class="subnav">
-    <clr-tree-node>
-      David Wallace (CFO)
-      <ng-template [clrIfExpanded]="true">
-        <clr-tree-node>
-          Michael Scott (Regional Manager)
 
-          <ng-template [clrIfExpanded]="true">
-            <clr-tree-node>Dwight K. Schrute (Assistant to the Regional Manager)</clr-tree-node>
-
-            <clr-tree-node>
-              Jim Halpert (Head of Sales)
-              <ng-template clrIfExpanded>
-                <clr-tree-node>Andy Bernard</clr-tree-node>
-                <clr-tree-node>Stanley Hudson</clr-tree-node>
-                <clr-tree-node>Phyllis Vance</clr-tree-node>
-                <clr-tree-node>Todd Packer</clr-tree-node>
-              </ng-template>
-            </clr-tree-node>
-
-            <clr-tree-node>
-              Angela Martin (Head of Accounting)
-              <ng-template clrIfExpanded>
-                <clr-tree-node>Kevin Malone</clr-tree-node>
-                <clr-tree-node>Oscar Martinez</clr-tree-node>
-              </ng-template>
-            </clr-tree-node>
-
-            <clr-tree-node>
-              Kelly Kapoor (Head of Customer Service)
-              <ng-template clrIfExpanded>
-                <clr-tree-node>Ryan Howard (Temp)</clr-tree-node>
-              </ng-template>
-            </clr-tree-node>
-
-            <clr-tree-node>
-              Creed Bratton (Quality Assurance)
-            </clr-tree-node>
-
-            <clr-tree-node>
-              Meredith Palmer (Supplier Relations)
-            </clr-tree-node>
-
-            <clr-tree-node>
-              Toby Flenderson (Human Resources)
-            </clr-tree-node>
-
-            <clr-tree-node>
-              Pam Beesly (Reception)
-            </clr-tree-node>
-
-            <clr-tree-node>
-              Darryl Philbin (Warehouse)
-            </clr-tree-node>
-          </ng-template>
-        </clr-tree-node>
-      </ng-template>
-    </clr-tree-node>
-  </nav> -->
   <div class="content-container">
     <div class="content-area">
-
+      ...
     </div>
     <nav class="sidenav">
-      <div class="hi-explorer">
-        <app-directory></app-directory>
-      </div>
+      <section class="sidenav-content">
+      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      </section>
+
+
     </nav>
-    <app-editor></app-editor>
   </div>
-</clr-main-container>
+</clr-main-container> -->
+
+<!-- <div class="row no-gutters">
+  <div class="col-12 col-sm-6 col-md-12 app-bg3 app-bg5 app-bg3">.col-12 .col-sm-6 .col-md-8</div>
+  <div class="col-12 col-md-12 app-bg5">.col-6 .col-md-4</div>
+</div>
+<div class="row no-gutters">
+  <div class="col-12 app-10-vh app-bg1">
+    AAA
+  </div>
+</div>
+<div class="row no-gutters">
+  <div class="col-12 app-10-vh app-bg3">
+    BBB
+  </div>
+</div>
+<div class="row no-gutters">
+  <div class="col-12 app-10-vh app-bg1">
+    CCC
+  </div>
+</div> -->

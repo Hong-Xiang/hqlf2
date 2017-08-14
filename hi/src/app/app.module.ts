@@ -1,10 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 
-// import { ClarityModule } from 'clarity-angular';
+import {
+  MenuItem,
+  TreeModule,
+  AccordionModule,
+  ButtonModule,
+  InputTextModule,
+  InputTextareaModule,
+  TabViewModule,
+  ToolbarModule
+} from 'primeng/primeng';
+
 import { AppComponent } from './app.component';
 import { DirectoryComponent } from './directory.component';
 import { FileComponent } from './file.component';
@@ -25,10 +37,17 @@ import { TextEditorService } from './texteditor.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    HttpClientModule
-    // ClarityModule.forRoot()
+    HttpClientModule,
+    RouterModule,
+    TreeModule,
+    ButtonModule,
+    InputTextModule,
+    InputTextareaModule,
+    TabViewModule,
+    ToolbarModule
   ],
   providers: [
     FileSystemService,

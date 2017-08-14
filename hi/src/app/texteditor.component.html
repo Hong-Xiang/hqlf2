@@ -1,10 +1,50 @@
-<div class='app-editor'>
-  <div *ngIf="file">
-    <div>
-      <label> FileName: {{file.name}} </label>
-      <button type="btn" (click)="onSaveClick()">Save</button>
+<div class='app-editor' class="h-100 p-0">
+  <div class="h-100 p-0">
+    <div class="h-10">
+      <p-toolbar>
+        <div class="ui-toolbar-group-left">
+          <button pButton type="button" label="New" icon="fa-plus"></button>
+          <button pButton type="button" label="Open" icon="fa-folder-open"></button>
+
+          <i class="fa fa-bars"></i>
+
+          <p-splitButton label="Save" icon="fa-check" [model]="items"></p-splitButton>
+        </div>
+
+        <div class="ui-toolbar-group-right">
+          <button pButton type="button" icon="fa-search"></button>
+          <i class="fa fa-bars"></i>
+          <button pButton type="button" icon="fa-refresh"></button>
+          <button pButton type="button" icon="fa-trash"></button>
+        </div>
+      </p-toolbar>
     </div>
-    <textarea [(ngModel)]="file.contents"></textarea>
+    <!-- <div class="h-75">
+      <p-tabView styleClass="h-100 app-editor-panel">
+
+          <p-tabPanel header="Header 1" closable="true" headerStyleClass="p-0" styleClass="">
+            <textarea class="mx-0 p-0 w-100 h-100" pInputTextarea> PAGE 1</textarea>
+          </p-tabPanel>
+          <p-tabPanel header="Header 2" closable="true">
+            <textarea class="mx-0 p-0 w-100 h-100" pInputTextarea autoResize="autoResize"> PAGE 2</textarea>
+          </p-tabPanel>
+          <p-tabPanel header="Header 3" closable="true">
+            Content 3
+          </p-tabPanel>
+
+
+      </p-tabView>
+    </div> -->
+    <div *ngIf="file" class="container-fluid">
+      <div>
+        <label> FileName: {{file.name}} </label>
+        <button type="btn" (click)="onSaveClick()">Save</button>
+      </div>
+      <textarea class="mx-0" pInputTextarea [(ngModel)]="file.contents" autoResize="autoResize" rows="30"></textarea>
+
+    </div>
   </div>
 
+
+  <!-- <textarea class="mx-0 p-0 w-100 h-100" pInputTextarea autoResize="autoResize">ABCDE</textarea> -->
 </div>

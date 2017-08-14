@@ -1,0 +1,52 @@
+{
+  "files": [
+    {
+      "name": "home",
+      "path": "/tmp/home",
+      "isdir": true,
+      "isexe": false,
+      "contents": [
+        "/tmp/home/f0",
+        "/tmp/home/f1",
+        "/tmp/home/f2",
+        "/tmp/home/f3",
+        "/tmp/home/f4"
+      ]
+    },
+    {
+      "name": "f0",
+      "path": "/tmp/home/f0",
+      "isdir": false,
+      "isexe": false,
+      "contents": ["Contents of f0"]
+    },
+    {
+      "name": "f1",
+      "path": "/tmp/home/f1",
+      "isdir": false,
+      "isexe": true,
+      "contents": ["Contents of f1"]
+    },
+    {
+      "name": "f2",
+      "path": "/tmp/home/f2",
+      "isdir": true,
+      "isexe": false,
+      "contents": ["/tmp/home/f2/f4", "/tmp/home/f2/f5"]
+    },
+    {
+      "name": "f4",
+      "path": "/tmp/home/f2/f4",
+      "isdir": false,
+      "isexe": false,
+      "contents": ["Contents of f4"]
+    },
+    {
+      "name": "f5",
+      "path": "/tmp/home/f2/f5",
+      "isdir": false,
+      "isexe": false,
+      "contents": ["Contents of f5"]
+    }
+  ]
+}

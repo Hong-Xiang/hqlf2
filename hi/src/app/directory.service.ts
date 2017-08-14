@@ -10,7 +10,7 @@ import { FileSystemService } from './fileSystem.service';
 export class DirectoryService {
   private directorySource = new Subject<Directory>();
   directoryOpened$ = this.directorySource.asObservable();
-  
+
   constructor(private fileSystemService: FileSystemService) {}
 
   exit(directory: Directory) {
