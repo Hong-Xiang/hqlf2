@@ -12,7 +12,8 @@ const testFilePaths = [
 
 @Component({
   selector: 'app-texteditor',
-  templateUrl: './textEditor.component.html'
+  templateUrl: './textEditor.component.html',
+  styleUrls: ['./textEditor.component.css']
 })
 export class TextEditorComponent {
   files: File[] = [];

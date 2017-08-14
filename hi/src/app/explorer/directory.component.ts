@@ -5,7 +5,8 @@ import { TreeNode } from 'primeng/primeng';
 
 @Component({
   selector: 'app-explorer-directory',
-  templateUrl: './directory.component.html'
+  templateUrl: './directory.component.html',
+  styleUrls: ['./directory.component.css']
 })
 export class DirectoryComponent {
   filesTree: TreeNode[] = [];

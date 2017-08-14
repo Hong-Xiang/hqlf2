@@ -1,12 +1,20 @@
-<h3 class="first">Explorer</h3>
-<div>
-  <div class="ui-inputgroup">
-    <input type="text" #pathToEnter pInputText value="/tmp/test20170814">
-    <button pButton (click)="new(pathToEnter.value)" type="button" icon="fa-plus-square" class="ui-button-secondary"></button>
+<div class="container-fluid h-100 px-0 mx-0">
+  <div class="d-flex flex-row hi-address">
+
+    <input class="h-100 w-100 mx-0 px-2" type="text" #pathToEnter value="/tmp/test20170814">
+
+
+    <button class="btn btn-primary" (click)="new(pathToEnter.value)"><i class="fa fa-plus-square"></i></button>
+
+    <button class="btn btn-primary" (click)="up()"><i class="fa fa-arrow-up"></i></button>
+
+    <button class="btn btn-primary" (click)="lift()"><i class="fa fa-level-up"></i></button>
+
+    <button class="btn btn-primary" (click)="close()"><i class="fa fa-close"></i></button>
+
+  </div>
+  <div class="hi-tree">
+    <p-tree [value]="filesTree" selectionMode="single" [(selection)]="selectedFile" (onNodeExpand)="nodeExpand($event)" (onNodeSelect)="nodeSelect($event)"
+      (onNodeUnselect)="nodeUnselect($event)" styleClass="hi-tree"></p-tree>
   </div>
 </div>
-<button (click)="up()">Up</button>
-<button (click)="lift()">Lift</button>
-<button (click)="close()">Close</button>
-<p-tree [value]="filesTree" selectionMode="single" [(selection)]="selectedFile" (onNodeExpand)="nodeExpand($event)" (onNodeSelect)="nodeSelect($event)"
-  [style]="{'max-height':'200px','overflow':'auto'}" (onNodeUnselect)="nodeUnselect($event)"></p-tree>

@@ -1551,21 +1551,42 @@ body .ui-treetable .ui-treetable-scrollable-footer .ui-treetable-scrollable-head
 body .ui-treetable .ui-treetable-scrollable-body::-webkit-scrollbar {
   background-color: #f0f3f5;
 }
+
 body .ui-tree {
   box-sizing: border-box;
+  height: 984px;
+  width: 100%;
 }
+
+body .ui-tree .ui-tree-container {
+  margin: 0;
+  padding: 0;
+}
+
+
+body .ui-treenode .ui-treenode-leaf {
+  margin: 0;
+  padding: 0;
+  height: 24px;
+}
+
+body .ui-treenode-content .ui-treenode-selectable{
+  height: 24px;
+}
+
 body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
-  font-size: 1.1em;
+  font-size: 13px;
   vertical-align: middle;
   display: inline-block;
   color: #747a7f;
-  margin-top: 0.2em;
+  margin-top: 0;
 }
+
 body .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-icon {
   vertical-align: middle;
   display: inline-block;
-  margin: 0.2em 0.375em 0 0;
-  font-size: 1.1em;
+  margin: 0;
+  font-size: 13px;
   color: #747a7f;
 }
 body .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
@@ -1573,6 +1594,7 @@ body .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
   vertical-align: middle;
   display: inline-block;
   padding: 0;
+  font-size: 13px;
 }
 body .ui-tree.ui-tree-selectable .ui-treenode .ui-treenode-content .ui-treenode-label:not(.ui-state-highlight):hover {
   background-color: #f4f3f4;

@@ -58,7 +58,7 @@
 
 
 
-<div class="app-main-window app-bg6">
+<div class="app-main-window">
 
   <nav class="navbar navbar-expand-md navbar-default fixed-top border-0 rounded-0 app-nav">
 
@@ -89,12 +89,12 @@
   </nav>
 
 
-  <div class="container-fluid" style="height: 95vh;">
-    <div class="row h-100">
-      <div class="col-md-2 app-bg3 sticky-top h-100 px-0">
+  <div class="app-content px-0">
+    <div class="row h-100 px-0 mx-0">
+      <div class="col-lg-3 col-xl-2 app-bg3 sticky-top h-100 px-0">
         <app-explorer-directory (onOpenFile)="explorerOpenFileEvent($event)"></app-explorer-directory>
       </div>
-      <div class="col-md-10 ml-md-auto p-0">
+      <div class="col-lg-9 col-xl-10 ml-md-auto px-0 mx-0">
         <app-texteditor></app-texteditor>
       </div>
 

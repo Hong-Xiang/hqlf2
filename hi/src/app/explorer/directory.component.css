@@ -1,0 +1,22 @@
+body .ui-tree .hi-tree {
+  box-sizing: content-box;
+  width: 100%;
+  height: 1000px;
+  overflow: 'auto';
+}
+
+body .ui-inputgroup .app-explorer .app-explorer-address {
+  height: 36px;
+}
+
+.hi-address {
+  height: 36px;
+}
+
+body .ui-tree .ui-treenode .li .ui-widget .ui-tree-container {
+  height: 24px;
+}
+
+body .ui-treenode-content {
+  height: 24px;
+}
