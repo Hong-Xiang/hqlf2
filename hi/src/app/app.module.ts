@@ -4,7 +4,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Router, Routes, RouterLink, RouterModule } from '@angular/router';
 import {
   MenuItem,
   TreeModule,
@@ -29,8 +29,19 @@ import { Image3DService } from './image3d/image3d.service';
 import { ViewComponent } from './image3d/view.component';
 import { SlidersComponent } from './image3d/slider.component';
 import { SlidersService } from './image3d/slider.service';
-// import { ImageComponent } from './image3d/image.component';
-// import { ImageService } from './image3d/image.service';
+import { ExplorerComponent } from './explorer.component';
+import { TaskListComponent } from './task/task-list.component';
+
+const appRoutes: Routes = [
+  { path: 'explorer', component: ExplorerComponent },
+  { path: 'tasklist', component: TaskListComponent },
+  {
+    path: '',
+    redirectTo: '/explorer',
+    pathMatch: 'full'
+  }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,8 +49,9 @@ import { SlidersService } from './image3d/slider.service';
     TextEditorComponent,
     Image3DComponent,
     ViewComponent,
-    SlidersComponent
-    // ImageComponent
+    SlidersComponent,
+    ExplorerComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +59,7 @@ import { SlidersService } from './image3d/slider.service';
     FormsModule,
     HttpModule,
     HttpClientModule,
-    RouterModule,
+    RouterModule.forRoot(appRoutes, { enableTracing: true }),
     TreeModule,
     ButtonModule,
     InputTextModule,
@@ -62,10 +74,8 @@ import { SlidersService } from './image3d/slider.service';
     TextEditorService,
     TaskService,
     Image3DService,
-    // ImageService,
     RESTfulService,
     SlidersService
-    // TextEditorService
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
