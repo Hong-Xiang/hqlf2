@@ -5,6 +5,11 @@ import {
   AfterViewInit,
   ViewChild
 } from '@angular/core';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+// import * as Rx from 'rxjs/Rx';
+
 import { Http } from '@angular/http';
 
 import { FileSystemService } from './file/fileSystem.service';
@@ -12,6 +17,8 @@ import { FileService } from './file/file.service';
 import { File } from './file/file';
 
 import { TextEditorComponent } from './textEditor/textEditor.component';
+import { Image3DComponent } from './image3d/image3d.component';
+import { Image3DService } from './image3d/image3d.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +27,6 @@ import { TextEditorComponent } from './textEditor/textEditor.component';
   providers: []
 })
 export class AppComponent implements AfterViewInit {
-  title = 'app';
   data = [1, 2, 3, 4, 5, 6];
   idSelected = 0;
   path: string;
@@ -31,11 +37,16 @@ export class AppComponent implements AfterViewInit {
   @ViewChild(TextEditorComponent)
   private textEditorComponent: TextEditorComponent;
 
-  constructor(private http: Http, private fileService: FileService) {
-    this.filedata = this.fileService.filesLoaded;
-  }
+  @ViewChild(Image3DComponent) private image3DComponent: Image3DComponent;
+
+  constructor(private http: Http, private image3DService: Image3DService) {}
+
+  // constructor(private http: Http, private fileService: FileService) {
+  //   // this.filedata = this.fileService.filesLoaded;
+  // }
 
   ngAfterViewInit() {}
+
   addId() {
     this.idSelected++;
     this.idSelected = this.idSelected % 6;
@@ -77,12 +88,24 @@ export class AppComponent implements AfterViewInit {
 
   testFileSystem() {}
 
-  explorerOpenFileEvent(event) {
-    this.editFile(event);
+  explorerOpenFileEvent(event: string) {
+    console.log(event);
+    if (event.endsWith('.txt')) {
+      this.editFile(event);
+    }
+    if (event.endsWith('.npy')) {
+      this.showImage(event);
+    }
   }
 
+  showImage(path: string) {
+    document.getElementById('text-editor').hidden = true;
+    document.getElementById('image-show3d').hidden = false;
+    this.image3DService.setPath(path);
+  }
   editFile(path: string) {
-    console.log(path);
+    document.getElementById('text-editor').hidden = false;
+    document.getElementById('image-show3d').hidden = true;
     this.textEditorComponent.openFile(path);
   }
   // checkSvr(): void {
@@ -92,4 +115,13 @@ export class AppComponent implements AfterViewInit {
   // getDir(path): void {
   //   this.directoryService.getDirJSON(path).then(res => this.data = res).catch();
   // }
+
+  debug() {
+    console.log('debug called.');
+    Observable.of(1, 2, 3).subscribe(n => {
+      console.log(n);
+    });
+    this.idSelected++;
+    console.log(this.data[3]);
+  }
 }
