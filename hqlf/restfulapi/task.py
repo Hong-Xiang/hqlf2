@@ -5,7 +5,6 @@ import os
 
 import json
 
-
 def _error_handle(err):
     def emsg(text):
         return {

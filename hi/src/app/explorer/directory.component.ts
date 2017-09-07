@@ -45,12 +45,13 @@ export class DirectoryComponent {
     return node;
   }
 
-  new(path: string) {
+  newDir(path: string) {
     this.fileService.getFile(path, false).then(file => {
       const node = this.getNodeFromFile(file);
       this.filesTree.push(node);
     });
   }
+
   init() {
     this.fileService.getFile('/tmp/test20170810', false).then(file => {
       const node = this.getNodeFromFile(file);

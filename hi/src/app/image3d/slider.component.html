@@ -1,0 +1,9 @@
+<div>
+  <div *ngFor="let i of [0, 1, 2]">
+    <span>{{labels[i]}}</span>
+    <input [(ngModel)]="values[i]" (input)="sliderChange(i, $event.target)"/>
+    <!-- <p-slider [(ngModel)]="values[i]" [min]="ranges[i].min" [max]="ranges[i].max" (onChange)="sliderChange(i, $event)"></p-slider> -->
+    <button class="btn" (click)="onInc(i)">+</button>
+    <button class="btn" (click)="onDec(i)">-</button>
+  </div>
+</div>

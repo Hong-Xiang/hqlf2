@@ -1,0 +1,26 @@
+<div>
+  <div class="col-6 col-md-6 m-0 p-6">
+    <div>
+      <h6>Path: {{path}}</h6>
+    </div>
+
+    <button (click)="loadHead()">Head</button>
+    <button (click)="loadView3()">VIEWALL</button>
+    <div *ngIf="isShowHeader">
+      <div>Shape: <span *ngFor="let sz of img.header.shape"> {{sz}} </span> </div>
+      <app-image3d-sliders></app-image3d-sliders>
+    </div>
+  </div>
+  <div class="col-6 col-md-6 m-0 p-2">
+    <app-image3d-view></app-image3d-view>
+  </div>
+  <div class="col-6 col-md-6 m-0 p-2">
+    <app-image3d-view></app-image3d-view>
+  </div>
+  <div class="col-6 col-md-6 m-0 p-2">
+    <app-image3d-view></app-image3d-view>
+  </div>
+  <div class="col-6 col-md-6 m-0 p-2">
+    <app-image3d-view></app-image3d-view>
+  </div>
+</div>

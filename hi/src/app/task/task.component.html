@@ -1,0 +1,16 @@
+<div class="container-fluid app-task">
+  <div class="row">
+    <div class="p-2 col-1">{{task.id}}</div>
+    <div class="p-2 col-1">{{task.name}}</div>
+    <div class="p-2 col-1">{{task.workdir}}</div>
+    <div class="p-2 col-1">{{task.pre}}</div>
+    <div class="p-2 col-1">{{task.state}}</div>
+    <div class="p-2 col-1" *ngIf="task.sid">{{task.sid}}</div>
+    <div class="p-2 col-1"><button type="btn" (click)="submit()" >Submit</button></div>
+    <div class="p-2 col-1"><button type="btn btn-disabled">Run</button></div>
+    <div class="p-2 col-1"><button type="btn" (click)="delete()">Delete</button></div>
+  </div>
+
+
+
+</div>
