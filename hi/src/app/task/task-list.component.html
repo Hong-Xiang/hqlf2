@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <button type="btn" (click)="getAll()">GetAll</button>
+    <input #tid placeholder="taskid">
+    <button type="btn" (click)="getId(tid.value)">GetId</button>
+    <button type="btn" (click)="openCreateTask()">Create Task</button>
+</div>
+<div *ngIf="createFormShow">
+  <app-create-task [templateName]="TPLNAME" (onTaskCreate)="createTask($event)" (onTaskCancel)="cancelTask()"></app-create-task>
+</div>
+<div *ngFor="let t of tasks">
+  <app-task [task]=t (onTaskSubmit)="submit($event)" (onTaskDelete)="delete($event)"></app-task>
+</div>

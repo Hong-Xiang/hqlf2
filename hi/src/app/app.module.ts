@@ -16,6 +16,7 @@ import {
   ToolbarModule,
   SliderModule
 } from 'primeng/primeng';
+
 import { RESTfulService } from './restful.service';
 import { AppComponent } from './app.component';
 import { FileSystemService } from './file/fileSystem.service';
@@ -31,7 +32,8 @@ import { SlidersComponent } from './image3d/slider.component';
 import { SlidersService } from './image3d/slider.service';
 import { ExplorerComponent } from './explorer.component';
 import { TaskListComponent } from './task/task-list.component';
-
+import { TaskComponent } from './task/task.component';
+import { CreateTaskComponent } from './task/create-task.component';
 const appRoutes: Routes = [
   { path: 'explorer', component: ExplorerComponent },
   { path: 'tasklist', component: TaskListComponent },
@@ -51,7 +53,9 @@ const appRoutes: Routes = [
     ViewComponent,
     SlidersComponent,
     ExplorerComponent,
-    TaskListComponent
+    TaskListComponent,
+    TaskComponent,
+    CreateTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +70,7 @@ const appRoutes: Routes = [
     InputTextareaModule,
     TabViewModule,
     ToolbarModule,
-    SliderModule
+    SliderModule,
   ],
   providers: [
     FileSystemService,
@@ -77,6 +81,7 @@ const appRoutes: Routes = [
     RESTfulService,
     SlidersService
   ],
+
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
