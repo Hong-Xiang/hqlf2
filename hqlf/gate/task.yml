@@ -1,0 +1,5 @@
+source_dir: /nfs/ws1/task_zoo/split1
+main_mac: PET_Ecat.mac
+analysis_c: PET_Analyse.C
+nb_split: 10
+merge_file: polyEcat.txt
