@@ -62,7 +62,7 @@ def init(config):
                        c['target'],
                        c['group_name'])
     service.make_run_sh(c['target'], c['run_sh'], c['main_mac'], c['analysis_c'])
-    service.make_post_sh(c['target'], c['post_sh'], c['main_mac'], c['analysis_c'])
+    service.make_post_sh(c['target'], c['post_sh'])
     service.make_subs(c['target'], c['nb_split'])
 
 
@@ -78,14 +78,14 @@ def run(config):
 def submit(config):
     # TODO: add submit service
     c = load_config(config)
-    service.submit(c['target'], c['sh_file'], service.submit_service_direct)
+    service.submit(c['target'], c['run_sh'], service.submit_service_direct)
 
 
 @gate.command()
 @click.option('--config', '-c', type=str, default=DEFAULT_CONFIG_FILE, help='config YAML file name')
 def merge(config):
     c = load_config(config)
-    service.merge(c['target'], c['merge_file_name'])
+    service.merge(c['target'], c['merge_file'])
 
 
 @gate.command()
