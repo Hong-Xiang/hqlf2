@@ -34,11 +34,11 @@ def make_run_sh(target, file_name, main_mac, analysis_c):
                  + "date\n"
                  + "#SBATCH -o %j.out\n"
                  + "#SBATCH -e %j.err\n"
-                #  + "Gate {mac}\n".format(mac=main_mac)
-                #  + "root -q -b {cfile}\n".format(cfile=analysis_c)
-                 + "echo datadata > result.txt\n"
-                 + "sleep 600\n"
-                 + "echo datadata > result.txt\n"
+                 + "Gate {mac}\n".format(mac=main_mac)
+                 + "root -q -b {cfile}\n".format(cfile=analysis_c)
+                #  + "echo datadata > result.txt\n"
+                #  + "sleep 600\n"
+                #  + "echo datadata > result.txt\n"
                  + "date\n")
             print(c, file=fout)
 
