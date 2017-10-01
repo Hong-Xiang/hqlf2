@@ -20,7 +20,7 @@ def copy_group():
 @click.option('--target', 't', type=str, default='.', help='target directory')
 def generate_config(target):
     default_config = {
-        'template_source_directory'
+        'template_source_directory': ''
     }
     with 
 
