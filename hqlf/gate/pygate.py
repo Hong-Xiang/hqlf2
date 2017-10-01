@@ -1,3 +1,4 @@
+#!/home/hongxwing/anaconda3/bin/python
 import click
 import yaml
 from fs.osfs import OSFS
@@ -23,7 +24,9 @@ DEFAULT_CONFIGS = {
     'nb_split': 10,
     'merge_file': 'polyEcat.txt',
     'no_action': False,
-    'sh_file': 'run.sh'
+    'sh_file': 'run.sh',
+    'run_sh': 'run.sh',
+    'post_sh': 'post.sh'
 }
 
 DEFAULT_CONFIG_FILE = 'config.yml'
