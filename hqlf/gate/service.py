@@ -8,7 +8,7 @@ from fs import path
 
 
 def template_path():
-    return '/home/hongxwing/Workspace/templates/mac_zoo'
+    return '/home/hongxwing/Workspace/mac_zoo'
 
 
 def group_macs(group_name):
@@ -56,21 +56,28 @@ def make_sub(target, sub_id):
     copy_dir(target, sub.getsyspath('.'))
 
 
-def merge(targe):
+def make_subs(target, nb_split):
+    for i in range(nb_split):
+        make_sub(target, i)
+
+
+def merge(targe, merge_file_name):
     with OSFS(targe) as t:
-        with t.open('config.yml') as config_fin:
-            c = yaml.load(config_fin)
-        with t.open(c['merge_file'], 'w') as fout:
-            for f in t.walk.files(filter=[c['merge_file']]):
+        with t.open(merge_file_name, 'w') as fout:
+            for f in t.walk.files(filter=[merge_file_name]):
                 if path.issamedir('/', f):
                     continue
                 with t.open(f) as fin_tmp:
                     print(fin_tmp.read(), end='', file=fout)
 
 
-def submit(target, tasks_service):
+def submit(target, config_file):
     with OSFS(targe) as t:
         with t.open('config.yml') as fin:
             c = yaml.load(fin)
         for d in t.walk.dirs(filter=['sub*']):
             tasks_service.submit.sbatch(workdir=t.getsyspath())
+
+
+def clear(target):
+    
