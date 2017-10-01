@@ -27,7 +27,7 @@ def copy_group(source, target, group_name):
                 copy_dir(sd.getsyspath('.'), t.getsyspath('.'))
 
 
-def make_sh(target, file_name, main_mac, analysis_c):
+def make_run_sh(target, file_name, main_mac, analysis_c):
     with OSFS(target) as t:
         with t.open(file_name, 'w') as fout:
             c = ("#!/bin/bash\n"
@@ -36,6 +36,18 @@ def make_sh(target, file_name, main_mac, analysis_c):
                  + "#SBATCH -e %j.err\n"
                  + "Gate {mac}\n".format(mac=main_mac)
                  + "root -q -b {cfile}\n".format(cfile=analysis_c)
+                 + "date\n")
+            print(c, file=fout)
+
+def make_merge_sh(target, file_name):
+    with OSFS(target) as t:
+        with t.open(file_name, 'w') as fout:
+            c = ("#!/bin/bash\n"
+                 + "date\n"
+                 + "#SBATCH -o %j.out\n"
+                 + "#SBATCH -e %j.err\n"
+                 + "pygate merge\n"
+                 + "pygate clear_subdirs\n"
                  + "date\n")
             print(c, file=fout)
 

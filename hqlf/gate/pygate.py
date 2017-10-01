@@ -23,8 +23,7 @@ DEFAULT_CONFIGS = {
     'analysis_c': 'PET_Analyse.C',
     'nb_split': 10,
     'merge_file': 'polyEcat.txt',
-    'no_action': False,
-    'sh_file': 'run.sh',
+    'no_action': False,    
     'run_sh': 'run.sh',
     'post_sh': 'post.sh'
 }
@@ -46,13 +45,13 @@ def load_config(config):
         return yaml.load(fin)
 
 
-@gate.command()
-@click.option('--config', '-c', type=str, default=DEFAULT_CONFIG_FILE, help='config file name')
-def copy_group(config):
-    c = load_config(config)
-    service.copy_group(c['template_source_directory'],
-                       c['target'],
-                       c['group_name'])
+# @gate.command()
+# @click.option('--config', '-c', type=str, default=DEFAULT_CONFIG_FILE, help='config file name')
+# def copy_group(config):
+#     c = load_config(config)
+#     service.copy_group(c['template_source_directory'],
+#                        c['target'],
+#                        c['group_name'])
 
 
 @gate.command()
@@ -62,7 +61,8 @@ def init(config):
     service.copy_group(c['template_source_directory'],
                        c['target'],
                        c['group_name'])
-    service.make_sh(c['target'], c['sh_file'], c['main_mac'], c['analysis_c'])
+    service.make_run_sh(c['target'], c['run_sh'], c['main_mac'], c['analysis_c'])
+    service.make_post_sh(c['target'], c['post_sh'], c['main_mac'], c['analysis_c'])
     service.make_subs(c['target'], c['nb_split'])
 
 
