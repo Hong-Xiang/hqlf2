@@ -1,36 +1,35 @@
 import yaml
+import sys
+import subprocess
 from fs.osfs import OSFS
 from fs.copy import copy_file, copy_fs
 from fs import path
-
-# TODO: Extract these methods to config service
-# START OF CONFIGS
+import requests
 
 
-def template_path():
-    return '/home/hongxwing/Workspace/mac_zoo'
+def copy_mac(source, target, mac_name):
+    with OSFS(source), OSFS(target) as s, t:
+        copy_file(s, mac_name, t, mac_name)
 
 
-def group_macs(group_name):
-    with OSFS(template_path()) as tpl_dir:
-        with tpl_dir.open('group.yml') as fin:
-            return yaml.load(fin)[group_name]
-# END OF CONFIGS
+def copy_dir(source, target):
+    filters = ['*.mac', '*.sh', '*.C', '*.pat', '*.db']
+    with OSFS(source) as s:
+        with OSFS(target) as t:
+            for f in s.filterdir('.', files=filters, exclude_dirs=['*']):
+                copy_file(s, f.name, t, f.name)
 
 
-def copy_mac(target, mac_name):
-    copy_file(OSFS(template_path()), mac_name, OSFS(target), mac_name)
+def copy_group(source, target, group_name):
+    with OSFS(source) as s:
+        with s.opendir(group_name) as sd:
+            with OSFS(target) as t:
+                copy_dir(sd.getsyspath('.'), t.getsyspath('.'))
 
 
-def copy_group_macs(target, group_name):
-    macs = group_macs(group_name)
-    for m in macs:
-        copy_mac(target, m)
-
-
-def make_sh(target, main_mac, analysis_c):
+def make_sh(target, file_name, main_mac, analysis_c):
     with OSFS(target) as t:
-        with t.open('run.sh', 'w') as fout:
+        with t.open(file_name, 'w') as fout:
             c = ("#!/bin/bash\n"
                  + "date\n"
                  + "#SBATCH -o %j.out\n"
@@ -39,15 +38,6 @@ def make_sh(target, main_mac, analysis_c):
                  + "root -q -b {cfile}\n".format(cfile=analysis_c)
                  + "date\n")
             print(c, file=fout)
-
-
-def copy_dir(source, target):
-    filters = ['*.mac', '*.sh', '*.C', '*.pat']
-    with OSFS(source) as s:
-        with OSFS(target) as t:
-            files = list(s.walk.files(filter=filters))
-            for f in files:
-                copy_file(s, f, t, f)
 
 
 def make_sub(target, sub_id):
@@ -71,13 +61,54 @@ def merge(targe, merge_file_name):
                     print(fin_tmp.read(), end='', file=fout)
 
 
-def submit(target, config_file):
-    with OSFS(targe) as t:
-        with t.open('config.yml') as fin:
-            c = yaml.load(fin)
+def submit_service_direct(workdir, file):
+    cmd = 'cd {dir} && sbatch {file}'.format(dir=workdir, file=file)
+    with subprocess.Popen([cmd], shell=True, stdout=subprocess.PIPE) as p:
+        print(p.stdout.read().decode())
+
+
+def submit(target, file_name, submit_service):
+    """
+    Inputs:
+    - target: path of work directory,        
+    - url: url of task manager,
+    - submit_service: a Slurm submit service with args: workdir, file_name
+    """
+    with OSFS(target) as t:
         for d in t.walk.dirs(filter=['sub*']):
-            tasks_service.submit.sbatch(workdir=t.getsyspath())
+            submit_service(t.getsyspath(d), file_name)
 
 
-def clear(target):
-    
+def clear_all(target, config, no_action=False):
+    with OSFS(target) as t:
+        for f in t.filterdir(path='.', exclude_files=[config]):
+            if no_action:
+                print('TO DELTE: {0}/{1}.'.format(t.getsyspath('.'), f.name))
+            else:
+                if f.is_dir:
+                    t.removetree(f.name)
+                else:
+                    t.remove(f.name)
+
+
+def clear_subdirs(target, no_action=False):
+    with OSFS(target) as t:
+        for d in t.filterdir(path='.', exclude_files=['*'], dirs=['sub*']):
+            if no_action:
+                print('TO DELTE: {0}/{1}.'.format(t.getsyspath('.'), d.name))
+            else:
+                t.removetree(d.name)
+
+
+def run(target, mac_file, stdout=None, stderr=None):
+    if stdout is None:
+        stdouts = sys.stdout
+    else:
+        stdouts = open(stdout, 'w')
+    if stderr is None:
+        stderrs = sys.stderr
+    else:
+        stderrs = open(stderr, 'w')
+    with subprocess.Popen(['Gate', mac_file], stdout=subprocess.PIPE, stderr=subprocess.PIPE) as p:
+        stdouts.write(p.stdout.read().decode())
+        stderrs.write(p.stderr.read().decode())
