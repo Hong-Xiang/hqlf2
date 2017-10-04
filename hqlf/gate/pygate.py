@@ -8,7 +8,6 @@ import sys
 from hqlf.gate import service
 
 
-
 @click.group()
 def gate():
     pass
@@ -23,7 +22,7 @@ DEFAULT_CONFIGS = {
     'analysis_c': 'PET_Analyse.C',
     'nb_split': 10,
     'merge_file': 'polyEcat.txt',
-    'no_action': False,    
+    'no_action': False,
     'run_sh': 'run.sh',
     'post_sh': 'post.sh'
 }
@@ -61,7 +60,8 @@ def init(config):
     service.copy_group(c['template_source_directory'],
                        c['target'],
                        c['group_name'])
-    service.make_run_sh(c['target'], c['run_sh'], c['main_mac'], c['analysis_c'])
+    service.make_run_sh(c['target'], c['run_sh'],
+                        c['main_mac'], c['analysis_c'])
     service.make_post_sh(c['target'], c['post_sh'])
     service.make_subs(c['target'], c['nb_split'])
 
@@ -75,10 +75,19 @@ def run(config):
 
 @gate.command()
 @click.option('--config', '-c', type=str, default=DEFAULT_CONFIG_FILE, help='config YAML file name')
-def submit(config):
+@click.option('--worker', '-w', type=str, default='print', help='servie type')
+def submit(config, worker):
     # TODO: add submit service
     c = load_config(config)
-    service.submit(c['target'], c['run_sh'], service.submit_service_direct)
+    if worker == 'print':
+        service.submit(c['target'], c['run_sh'], c['post_sh'],
+                       service.submit_service_print)
+    elif worker == 'direct':
+        service.submit(c['target'], c['run_sh'], c['post_sh'],
+                       service.submit_service_direct)
+    elif worker == 'hqlf':
+        service.submit(c['target'], c['run_sh'], c['post_sh'],
+                       service.submit_service_hqlf)
 
 
 @gate.command()
@@ -93,6 +102,7 @@ def merge(config):
 def clear_subdirs(config):
     c = load_config(config)
     service.clear_subdirs(c['target'], c['no_action'])
+
 
 @gate.command()
 @click.option('--config', '-c', type=str, default=DEFAULT_CONFIG_FILE, help='config YAML file name')
