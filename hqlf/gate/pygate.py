@@ -74,7 +74,7 @@ def run(config):
 
 @gate.command()
 @click.option('--config', '-c', type=str, default=DEFAULT_CONFIG_FILE, help='config YAML file name')
-@click.option('--worker', '-w', type=str, default='print', help='servie type')
+@click.option('--worker', '-w', type=str, default='print', help='service type, one of [print, direct, slurm]')
 def submit(config, worker):
     # TODO: add submit service
     c = load_config(config)
