@@ -44,26 +44,25 @@ def load_config(config):
         return yaml.load(fin)
 
 
-# @gate.command()
-# @click.option('--config', '-c', type=str, default=DEFAULT_CONFIG_FILE, help='config file name')
-# def copy_group(config):
-#     c = load_config(config)
-#     service.copy_group(c['template_source_directory'],
-#                        c['target'],
-#                        c['group_name'])
-
-
 @gate.command()
 @click.option('--config', '-c', type=str, default=DEFAULT_CONFIG_FILE, help='config YAML file name')
-def init(config):
+@click.option('--templates', '-t', isflag=True)
+@click.option('--shell', '-s', isflag=True)
+@click.option('--dirs', '-d', isflag=True)
+def init_all(config, templates, shell, dirs):
     c = load_config(config)
-    service.copy_group(c['template_source_directory'],
-                       c['target'],
-                       c['group_name'])
-    service.make_run_sh(c['target'], c['run_sh'],
-                        c['main_mac'], c['analysis_c'])
-    service.make_post_sh(c['target'], c['post_sh'])
-    service.make_subs(c['target'], c['nb_split'])
+    if not dirs and not shell and not templates:s
+        make_all = True
+    if templates or make_all:
+        service.copy_group(c['template_source_directory'],
+                        c['target'],
+                        c['group_name'])
+    if shell or make_all:
+        service.make_run_sh(c['target'], c['run_sh'],
+                            c['main_mac'], c['analysis_c'])
+        service.make_post_sh(c['target'], c['post_sh'])
+    if dirs or make_all:
+        service.make_subs(c['target'], c['nb_split'])
 
 
 @click.command()
@@ -75,7 +74,7 @@ def run(config):
 
 @gate.command()
 @click.option('--config', '-c', type=str, default=DEFAULT_CONFIG_FILE, help='config YAML file name')
-@click.option('--worker', '-w', type=str, default='print', help='servie type')
+@click.option('--worker', '-w', type=str, default='print', help='service type, one of [print, direct, slurm]')
 def submit(config, worker):
     # TODO: add submit service
     c = load_config(config)
